@@ -1,0 +1,1 @@
+export { default as authCreateUser } from "./authCreateUser.controllers";
