@@ -1,9 +1,16 @@
-import { Router } from "express";
+import { Router, RequestHandler } from "express";
 import { body } from "express-validator";
 
-import { authCreateUser } from "../controllers";
+import { authCreateUser, authLoadCheck } from "../controllers";
+import { checkTokenPage } from "../middlerwares";
 
 const authRouter: Router = Router();
+
+authRouter
+    .get("/",
+        checkTokenPage,
+        authLoadCheck    
+    );
 
 authRouter
     .post("/",
