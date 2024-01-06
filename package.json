@@ -8,10 +8,9 @@
     "url": "https://github.com/PhatYSD/mean-stack-auth-api.git"
   },
   "scripts": {
-    "start": "ts-node ./src/index.ts",
+    "start": "node ./dist/index.js",
     "dev": "npx nodemon ./src/index.ts",
-    "build": "npx tsc",
-    "vercel-build": "echo Hello"
+    "build": "npx tsc"
   },
   "author": "phatysd",
   "license": "ISC",
@@ -24,7 +23,8 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.6",
     "nodemon": "^3.0.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -35,7 +35,6 @@
     "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.0.3",
-    "morgan": "^1.10.0",
-    "ts-node": "^10.9.2"
+    "morgan": "^1.10.0"
   }
 }
