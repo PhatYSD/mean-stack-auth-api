@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { body } from "express-validator";
 
-import { authCreateUser, authLoadCheck, authResetPassword, authDeleteAccount } from "../controllers";
+import { authCreateUser, authLoadCheck, authResetPassword, authDeleteAccount, authLogin } from "../controllers";
 import { checkTokenPage } from "../middlerwares";
 
 const authRouter: Router = Router();
@@ -50,14 +50,33 @@ authRouter
  
 authRouter
     .post("/deleteaccount",
-    body("password")
-        .trim()
-        .notEmpty()
-        .isLength({
-            min: 4
-        }),
-	checkTokenPage,
-	authDeleteAccount	
+        body("password")
+            .trim()
+            .notEmpty()
+            .isLength({
+                min: 4
+            }),
+        checkTokenPage,
+        authDeleteAccount	
+    );
+
+authRouter
+    .post("/login",
+        body("username")
+            .trim()
+            .notEmpty()
+            .isLength({
+                min: 4,
+                max: 16
+            }),
+        body("password")
+            .trim()
+            .notEmpty()
+            .isLength({
+                min: 4
+            }),
+        checkTokenPage,
+        authLogin
     );
 
 export default authRouter;

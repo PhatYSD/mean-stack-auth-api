@@ -5,7 +5,7 @@ import { matchedData, validationResult,  } from "express-validator";
 import { User, UserDocument } from "../models";
 import { Env } from "../utils";
 
-interface DataRequest {
+export interface DataRequest {
     username: string;
     password: string;
 }

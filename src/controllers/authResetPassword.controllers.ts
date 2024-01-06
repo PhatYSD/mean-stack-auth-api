@@ -5,7 +5,7 @@ import { matchedData, validationResult } from "express-validator";
 
 import { CheckTokenPage } from "../middlerwares";
 
-interface DataRequest {
+interface ChangePassword {
     oldPassword: string;
     newPassword: string;
 }
@@ -31,7 +31,7 @@ export default async function authResetPassword(req: CheckTokenPage, res: Respon
         });
     }
 
-    const { oldPassword, newPassword } = matchedData(req) as DataRequest;
+    const { oldPassword, newPassword } = matchedData(req) as ChangePassword;
 
     if (!oldPassword || !newPassword) {
         return res.status(400).json({

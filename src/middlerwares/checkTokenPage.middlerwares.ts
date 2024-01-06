@@ -16,6 +16,10 @@ interface Result {
 export default async function checkTokenPage(req: CheckTokenPage, res: Response, next: NextFunction) {
     const token = req.header("access-token") as string;
 
+    if (!token && req.path === "/login") {
+        return next();
+    }
+
     if (!token) {
         return res
             .status(403)
