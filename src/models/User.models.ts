@@ -7,6 +7,7 @@ export interface UserDocument extends Document {
     date: Date;
 }
 
+// Create a new Mongoose Schema for the User document
 const userSchema = new Schema<UserDocument>({
     username: {
         type: String,
@@ -25,6 +26,7 @@ const userSchema = new Schema<UserDocument>({
     }
 });
 
+// Middleware to hash the password before saving the User document
 userSchema.pre<UserDocument>("save", async function (next) {
     if (!this.isModified('password')) return next();
 

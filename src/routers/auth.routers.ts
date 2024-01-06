@@ -6,12 +6,14 @@ import { checkTokenPage } from "../middlerwares";
 
 const authRouter: Router = Router();
 
+// check token on client
 authRouter
     .get("/",
         checkTokenPage,
         authLoadCheck    
     );
 
+// Create username and password
 authRouter
     .post("/",
         body("username")
@@ -30,6 +32,7 @@ authRouter
         authCreateUser
     );
 
+// Reset password
 authRouter
     .post("/resetpassword",
         body("oldPassword")
@@ -48,6 +51,7 @@ authRouter
         authResetPassword
     );
  
+// Delete account
 authRouter
     .post("/deleteaccount",
         body("password")
@@ -60,6 +64,7 @@ authRouter
         authDeleteAccount	
     );
 
+// login to account
 authRouter
     .post("/login",
         body("username")

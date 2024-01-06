@@ -13,6 +13,7 @@ interface Result {
     userId: string;
 }
 
+// check token on header from client side.
 export default async function checkTokenPage(req: CheckTokenPage, res: Response, next: NextFunction) {
     const token = req.header("access-token") as string;
 
