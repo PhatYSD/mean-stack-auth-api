@@ -1,7 +1,7 @@
-import { Router, RequestHandler } from "express";
+import { Router } from "express";
 import { body } from "express-validator";
 
-import { authCreateUser, authLoadCheck } from "../controllers";
+import { authCreateUser, authLoadCheck, authResetPassword } from "../controllers";
 import { checkTokenPage } from "../middlerwares";
 
 const authRouter: Router = Router();
@@ -28,6 +28,24 @@ authRouter
                 min: 4
             }),
         authCreateUser
+    );
+
+authRouter
+    .post("/resetpassword",
+        body("oldPassword")
+            .trim()
+            .notEmpty()
+            .isLength({
+                min: 4
+            }),
+        body("newPassword")
+            .trim()
+            .notEmpty()
+            .isLength({
+                min: 4
+            }),
+        checkTokenPage,
+        authResetPassword
     );
 
 export default authRouter;

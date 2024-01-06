@@ -5,7 +5,7 @@ import { matchedData, validationResult,  } from "express-validator";
 import { User, UserDocument } from "../models";
 import { Env } from "../utils";
 
-interface AuthCreateUser {
+interface DataRequest {
     username: string;
     password: string;
 }
@@ -21,7 +21,7 @@ export default async function authCreateUser(req: Request, res: Response) {
         });
     }
 
-    const dataRequest = matchedData(req) as AuthCreateUser;
+    const dataRequest = matchedData(req) as DataRequest;
 
     if (!dataRequest) {
         return res.status(400).json({
@@ -51,7 +51,7 @@ export default async function authCreateUser(req: Request, res: Response) {
             });
         }
 
-        res.status(500).json({
+        return res.status(500).json({
             success: false,
             message: "Internal server error. Unable to create user."
         });

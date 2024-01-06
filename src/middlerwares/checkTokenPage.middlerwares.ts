@@ -6,6 +6,7 @@ import { User } from "../models";
 
 export interface CheckTokenPage extends Request {
     userName?: string;
+    userId?: string;
 }
 
 interface Result {
@@ -16,7 +17,7 @@ export default async function checkTokenPage(req: CheckTokenPage, res: Response,
     const token = req.header("access-token") as string;
 
     if (!token) {
-        res
+        return res
             .status(403)
             .json({
                 success: false,
@@ -28,7 +29,7 @@ export default async function checkTokenPage(req: CheckTokenPage, res: Response,
         const result = jwt.verify(token, Env.JWT_AUTH_SECRET) as Result;
 
         if (!("userId" in result)) {
-            res
+            return res
                 .status(401)
                 .json({
                     success: false,
@@ -46,10 +47,12 @@ export default async function checkTokenPage(req: CheckTokenPage, res: Response,
         }
 
         req.userName = user.username;
+        req.userId = user.id;
+
         next();
     } catch (error) {
         console.log("An error occurred:", error);
-        res
+        return res
             .status(500)
             .json({
                 success: false,
