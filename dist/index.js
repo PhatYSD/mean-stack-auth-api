@@ -13,4 +13,4 @@ server.use(app_1.default);
 server.get("/", (_req, res) => {
     res.send({ message: "Welcome to mern stack auth API. Go to '/' path for used API." });
 });
-(0, utils_1.Conf)(server, APP_PORT, DATABASE_MONGO_URI);
+exports.default = (0, utils_1.Conf)(server, APP_PORT, DATABASE_MONGO_URI);
