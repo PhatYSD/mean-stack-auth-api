@@ -13,4 +13,4 @@ server.get("/", (_req: Request, res: Response) => {
     res.send({ message: "Welcome to mern stack auth API. Go to '/' path for used API." });
 });
 
-export default Conf(server, PORT || 5001, DATABASE_MONGO_URI);
+Conf(server, PORT || 5001, DATABASE_MONGO_URI);
