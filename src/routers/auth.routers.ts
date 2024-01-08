@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { body } from "express-validator";
 
-import { authCreateUser, authLoadCheck, authResetPassword, authDeleteAccount, authLogin } from "../controllers";
+import { authCreateUser, authLoadCheck, authResetPassword, authDeleteAccount, authLogin, authForgetPasswordCheck, authForgetPasswordChange } from "../controllers";
 import { checkTokenPage } from "../middlerwares";
 
 const authRouter: Router = Router();
@@ -82,6 +82,29 @@ authRouter
             }),
         checkTokenPage,
         authLogin
+    );
+
+authRouter
+    .post("/forgetpassword/check",
+        body("username")
+            .trim()
+            .notEmpty()
+            .isLength({
+                min: 4,
+                max: 16
+            }),
+        authForgetPasswordCheck
+    );
+
+authRouter
+    .post("/forgetpassword/change",
+        body("password")
+            .trim()
+            .notEmpty()
+            .isLength({
+                min: 4
+            }),
+        authForgetPasswordChange
     );
 
 export default authRouter;
