@@ -5,7 +5,8 @@ import { User } from "../../models";
 
 export default async function authForgetPassword(req: Request, res: Response) {
     const errors = validationResult(req);
-
+    console.log(req.body.username);
+    
     if (!errors.isEmpty()) {
         return res.status(400).json({
             success: false,
